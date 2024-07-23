@@ -1,0 +1,35 @@
+Policy for ssm
+23-07-2024
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:StartSession"
+            ],
+            "Resource": [
+                "arn:aws:ssm:eu-west-2:851123647940:document/SSM-SessionManagerRunShell",
+                "arn:aws:ssm:eu-west-2::document/AWS-StartPortForwardingSessionToRemoteHost"
+            ]
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:StartSession"
+            ],
+            "Resource": [
+                "arn:aws:ec2:eu-west-2:851123647940:instance/*",
+                "arn:aws:ec2:eu-west-2:851123647940:instance/i-0b7c2b90a3e39ad67"
+            ],
+            "Condition": {
+                "StringLike": {
+                    "ssm:resourceTag/Name": [
+                        "exc-dev*",
+                        "bastion"
+                    ]
+                }
+            }
+        }
+    ]
+}
